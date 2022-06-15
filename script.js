@@ -17,8 +17,8 @@ function computerPlay(){
 }
 
 function playRound(playerSelection, computerSelection){
-    console.log(playerSelection);
-    console.log(computerSelection);
+
+    console.log(`The computer has chosen: ${computerSelection}. You have chosen: ${playerSelection}.`)
 
     switch (playerSelection){
         case 'rock':
@@ -64,14 +64,29 @@ function game(){
     for (let i = 0; i < 5; i++){
         userChoice = prompt('Rock, paper, or scissors?').toLowerCase();
         let gameResult = playRound(userChoice, computerPlay());
+        console.log(gameResult);
 
-        if (gameResult === 'You win!') {
+        if (gameResult === 'You win!'){
             userWinCount++;
         }
-        else{
+        else if (gameResult === 'You lose!'){
             compWinCount++;
         }
+        else{
+            continue;
+        }
     }
-
     
+    if (compWinCount === userWinCount){
+        console.log('The game is a tie!');
+        console.log(`The score was:\nUser: ${userWinCount}\nComputer: ${compWinCount}`);
+    }
+    else if (compWinCount > userWinCount){
+        console.log('You have lost!');
+        console.log(`The score was:\nUser: ${userWinCount}\nComputer: ${compWinCount}`);
+    }
+    else {
+        console.log('You have won!');
+        console.log(`The score was:\nUser: ${userWinCount}\nComputer: ${compWinCount}`);
+    }
 }
