@@ -7,8 +7,6 @@ btn.textContent = 'Play game!';
 
 body.appendChild(btn);
 
-let userChoice;
-
 btn.addEventListener('click', game);
 
 //Returns a random choice for the computer to play
@@ -20,6 +18,7 @@ function playRound(playerSelection, computerSelection){
 
     console.log(`The computer has chosen: ${computerSelection}. You have chosen: ${playerSelection}.`)
 
+    //Game event handler
     switch (playerSelection){
         case 'rock':
             if (computerSelection === 'paper'){
@@ -58,6 +57,7 @@ function playRound(playerSelection, computerSelection){
 }
 
 function game(){
+    let userChoice;
 
     let compWinCount = 0;
     let userWinCount = 0;
