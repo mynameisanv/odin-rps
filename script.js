@@ -1,13 +1,31 @@
 const body = document.querySelector('body');
-
-
 const options = ['rock', 'paper', 'scissors'];
-const btn = document.createElement('button');
-btn.textContent = 'Play game!';
 
-body.appendChild(btn);
+const btnRock = document.createElement('button');
+btnRock.textContent = 'Rock';
+const btnPaper = document.createElement('button');
+btnPaper.textContent = 'Paper';
+const btnScissors = document.createElement('button');
+btnScissors.textContent = 'Scissors';
 
-btn.addEventListener('click', game);
+body.appendChild(btnRock);
+body.appendChild(btnPaper);
+body.appendChild(btnScissors);
+
+btnRock.addEventListener('click', () =>{
+    let userChoice = 'Rock'.toLowerCase();
+    game(userChoice);
+})
+
+btnPaper.addEventListener('click', () =>{
+    let userChoice = 'Paper'.toLowerCase();
+    game(userChoice);
+})
+
+btnScissors.addEventListener('click', () =>{
+    let userChoice = 'Scissors'.toLowerCase();
+    game(userChoice);
+})
 
 //Returns a random choice for the computer to play
 function computerPlay(){
@@ -15,8 +33,6 @@ function computerPlay(){
 }
 
 function playRound(playerSelection, computerSelection){
-
-    console.log(`The computer has chosen: ${computerSelection}. You have chosen: ${playerSelection}.`)
 
     //Game event handler
     switch (playerSelection){
@@ -56,37 +72,20 @@ function playRound(playerSelection, computerSelection){
     }
 }
 
-function game(){
-    let userChoice;
-
+function game(userChoice){
     let compWinCount = 0;
     let userWinCount = 0;
-    for (let i = 0; i < 5; i++){
-        userChoice = prompt('Rock, paper, or scissors?').toLowerCase();
-        let gameResult = playRound(userChoice, computerPlay());
-        console.log(gameResult);
-
-        if (gameResult === 'You win!'){
-            userWinCount++;
-        }
-        else if (gameResult === 'You lose!'){
-            compWinCount++;
-        }
-        else{
-            continue;
-        }
-    }
+    let compChoice = computerPlay();
+    let gameResult = playRound(userChoice, compChoice);
     
-    if (compWinCount === userWinCount){
-        console.log('The game is a tie!');
-        console.log(`The score was:\nUser: ${userWinCount}\nComputer: ${compWinCount}`);
+    const div = document.createElement('div');
+    body.appendChild(div);
+    div.textContent = `The computer has chosen: ${compChoice}. You have chosen: ${userChoice}.\n${gameResult}`;
+
+    if (gameResult === 'You win!'){
+        userWinCount++;
     }
-    else if (compWinCount > userWinCount){
-        console.log('You have lost!');
-        console.log(`The score was:\nUser: ${userWinCount}\nComputer: ${compWinCount}`);
-    }
-    else {
-        console.log('You have won!');
-        console.log(`The score was:\nUser: ${userWinCount}\nComputer: ${compWinCount}`);
+    else if (gameResult === 'You lose!'){
+        compWinCount++;
     }
 }
